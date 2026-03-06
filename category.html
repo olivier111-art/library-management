@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Library Categories</title>
+
+<style>
+:root{
+    --bg-color: #f4f6f9;
+    --card-color: white;
+    --text-color: #222;
+    --accent: #3f51b5;
+}
+
+body.dark{
+    --bg-color: #1e1e2f;
+    --card-color: #2c2c3c;
+    --text-color: #ffffff;
+    --accent: #00bcd4;
+}
+
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: 0.3s;
+}
+
+header{
+    background: var(--accent);
+    padding: 20px;
+    color:white;
+    text-align:center;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h2{
+    margin:0;
+}
+
+.toggle-btn{
+    background:white;
+    color:black;
+    border:none;
+    padding:8px 15px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:40px;
+    gap:30px;
+}
+
+.card{
+    width:220px;
+    height:150px;
+    background: var(--card-color);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+    transition:0.3s;
+}
+.card a{
+    text-decoration: none;
+    padding-bottom: 7px;
+    color: none;
+}
+
+.card:hover{
+    transform:scale(1.05);
+    background: var(--accent);
+    color:white;
+}
+
+footer{
+    margin-top:50px;
+    text-align:center;
+    padding:20px;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>📚 Library Book Categories</h2>
+    <button class="toggle-btn" onclick="toggleMode()">Toggle Mode</button>
+</header>
+
+<div class="container">
+
+    <div class="card" onclick="">
+        <a href="https://www.google.com/aclk?sa=L&pf=1&ai=DChsSEwi06ab7me2SAxXVMAYAHeJ5FtoYACICCAEQARoCd3M&co=1&ase=2&gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtCh2wLksrD1-y3xDMCIeZ4hgQcj1cMGhdhn5jHZmZobv5wPGM7UpzkaAiKyEALw_wcB&ei=XgSbabzzE-qpkdUPnbHk2Qo&cid=CAASuwHkaFGeZzBvehHlphQBohx6-SlRa3f4as8AIOt9duSrNTa9GeFXGhy8puwA2cerPrOWkmWdmpwWXZ8CBW11FTfvCQvna1mBLLHFNFI4FkA8nTmMgSon2VpilQyByBYMSBlF1qZPmnSlWwfHrM791U_SDd_xno6OXAI3D5Vtbb72Lc2sNolb3zy9wXreSTzerzms39dA7QdyT0JueBqxQXcm8zVxKVgs7fs0pRo4kxpRyaygA7cF8ClnXQq-&cce=2&category=acrcp_v1_32&sig=AOD64_1kySNuZmRgEwBkOHmAUkX1R7pYVQ&q&sqi=2&nis=4&adurl=https://www.junkybooks.com/books?gad_source%3D1%26gad_campaignid%3D23289222385%26gbraid%3D0AAAABAJQiJ1fuSqRMkyOZHutBSDwt8v8g%26gclid%3DCj0KCQiA7-rMBhCFARIsAKnLKtCh2wLksrD1-y3xDMCIeZ4hgQcj1cMGhdhn5jHZmZobv5wPGM7UpzkaAiKyEALw_wcB&ved=2ahUKEwi8mqH7me2SAxXqVKQEHZ0YOasQ0Qx6BAgYEAQ">📖</a>
+         Story Books
+    </div>
+
+    <div class="card" onclick="goToCategory('novel')">
+        📚 Novels
+    </div>
+
+    <div class="card" onclick="goToCategory('political')">
+        <a href="https://www.amazon.com/Politics-Government/b?ie=UTF8&node=5571255011">🏛</a>
+         Political Books
+    </div>
+
+    <div class="card" onclick="goToCategory('study')">
+        <a href="https://elearning.reb.rw/course/index.php?categoryid=14">🎓</a>
+         Study Books
+    </div>
+
+    <div class="card" onclick="goToCategory('others')">
+        📂 Others
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Library Stock System | Designed by Onny
+</footer>
+
+<script>
+
+// Toggle Light/Dark Mode
+function toggleMode(){
+    document.body.classList.toggle("dark");
+}
+
+// Redirect to category page
+function goToCategory(type){
+    // This sends the category to another page
+    window.location.href = "books.html?category=" + type;
+}
+
+</script>
+
+</body>
+</html>

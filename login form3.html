@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #4e54c8, #8f94fb);
+      margin: 0px;
+      padding: 0px;
+      
+    }
+
+    .login-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      width: 1400px;
+      text-align: center;
+      background-size: cover;
+      padding-bottom: 89px;
+    }
+
+    .login-container h2 {
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+      color: #555;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .input-group input:focus {
+      border-color: #4e54c8;
+      outline: none;
+      box-shadow: 0 0 5px rgba(78, 84, 200, 0.3);
+    }
+
+    button {
+      width: 100%;
+      padding: 0.7rem;
+      background-color: #4e54c8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #3b40a4;
+    }
+
+    .message {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: red;
+      height: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <img src="log.jpeg">
+    <h2>Login</h2>
+    <div class="input-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Enter your username">
+    </div>
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password">
+    </div>
+    <button onclick="login()">Login</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const message = document.getElementById('message');
+
+      if (username === "" || password === "") {
+        message.textContent = "Please fill in all fields.";
+        return;
+      }
+
+      // Example check (you can replace with your real validation)
+      if (username === "admin" && password === "1234") {
+        message.style.color = "green";
+        message.textContent = "Login successful!";
+        setTimeout(() => {
+          window.location.href = 'index.html'
+        }, 500);
+      } else {
+        message.style.color = "red";
+        message.textContent = "Invalid username or password.";
+      }
+    }
+  </script>
+
+</body>
+</html>

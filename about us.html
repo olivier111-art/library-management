@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Library Stock | About Us</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* Reset */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.5s ease;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  body.light {
+    background: #f5f5f5;
+    color: #111;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 25px;
+    background: rgba(0,0,0,0.7);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    transition: all 0.5s ease;
+  }
+
+  body.light .container {
+    background: rgba(255,255,255,0.9);
+    color: #111;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  }
+
+  .container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.7);
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 3em;
+    color: #00ffff;
+    margin-bottom: 20px;
+    position: relative;
+    transition: color 0.4s ease;
+  }
+
+  body.light h1 { color: #ff6600; }
+
+  h1::after {
+    content: '123';
+    display: block;
+    font-size: 1.2em;
+    color: #00ffff;
+    margin: 10px auto 0;
+    transition: all 0.4s ease;
+  }
+
+  body.light h1::after { color: #ff6600; }
+
+  h1:hover { color: #ff6ec7; }
+  h1:hover::after { transform: scale(1.3); }
+
+  h2 {
+    color: #00ffff;
+    margin-top: 25px;
+  }
+
+  body.light h2 { color: #ff6600; }
+
+  p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    transition: transform 0.4s ease, color 0.4s ease;
+  }
+
+  p:hover { transform: translateX(10px); color: #00ffff; }
+  body.light p:hover { color: #ff6600; }
+
+  ul { list-style-type: square; margin-left: 20px; margin-bottom: 15px; }
+  ul li { margin: 10px 0; font-size: 1.1em; transition: color 0.3s ease; }
+  ul li:hover { color: #ff6ec7; }
+  body.light ul li:hover { color: #ff6600; }
+
+  .highlight { color: #ff6ec7; font-weight: bold; }
+  body.light .highlight { color: #ff6600; }
+
+  .toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #00ffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  body.light .toggle-btn {
+    background: #ff6600;
+    color: #fff;
+  }
+
+  .toggle-btn:hover { transform: scale(1.1); }
+</style>
+</head>
+<body>
+
+<button class="toggle-btn" id="modeToggle">Switch Mode</button>
+
+<div class="container">
+  <h1>About Us</h1>
+  <p>Welcome to <span class="highlight">Library Stock</span>, a comprehensive and modern library management system designed to revolutionize the way libraries operate. In today’s fast-paced digital world, libraries face many challenges — from keeping track of thousands of books and managing borrowers, to maintaining accurate records and ensuring resources are accessible to all. <span class="highlight">Library Stock</span> solves these challenges by providing an efficient, reliable, and user-friendly platform for managing library operations.</p>
+
+  <p>Our mission is to simplify library management by offering a system that is <span class="highlight">intuitive, organized, and secure</span>. Library Stock allows librarians to easily track books, monitor borrowing and returning, manage members, and maintain real-time inventory updates. At the same time, it provides readers with a seamless experience, enabling them to quickly find books, check availability, and stay informed about their borrowing history.</p>
+
+  <h2>Our Vision</h2>
+  <p>We envision a world where every library, big or small, can function efficiently with the help of technology. Our goal is to bridge the gap between traditional library management and modern digital solutions, ensuring knowledge is organized, accessible, and protected for everyone.</p>
+
+  <h2>Our Goals</h2>
+  <ul>
+    <li>Streamline library operations and reduce manual work</li>
+    <li>Provide accurate and real-time tracking of books and members</li>
+    <li>Enhance the experience for librarians and readers alike</li>
+    <li>Promote a culture of learning and easy access to information</li>
+    <li>Support schools, colleges, and institutions in modernizing their libraries</li>
+  </ul>
+
+  <h2>Why Choose Library Stock?</h2>
+  <p>Library Stock stands out because of its <span class="highlight">clean interface, fast performance, and reliable data management</span>. It is designed to handle the complexities of library operations while remaining simple for both librarians and readers. With features like user tracking, book management, borrowing history, and reports, Library Stock provides a complete solution for managing knowledge efficiently.</p>
+
+  <p>At <span class="highlight">Library Stock</span>, we believe that technology should empower learning, not complicate it. Every book, every reader, and every record matters — and our system ensures that libraries can manage all of these effortlessly.</p>
+
+  <p><strong>Library Stock is not just a system — it is a step towards modern, organized, and efficient libraries, where knowledge is truly at your fingertips.</strong></p>
+</div>
+
+<script>
+const toggleBtn = document.getElementById('modeToggle');
+toggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light');
+});
+</script>
+
+</body>
+</html>

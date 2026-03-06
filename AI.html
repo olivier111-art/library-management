@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Library Stock | Talk to Steos</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Roboto',sans-serif;background:#0d0d0d;color:#fff;transition:0.5s;}
+  body.light{background:#f5f5f5;color:#111;}
+
+  .main-container{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;}
+  .chat-card{width:90%;max-width:900px;height:80vh;background:rgba(255,255,255,0.05);backdrop-filter:blur(15px);
+    border-radius:25px;box-shadow:0 20px 60px rgba(0,0,0,0.5);display:flex;flex-direction:column;overflow:hidden;transition:0.5s;}
+  body.light .chat-card{background:rgba(255,255,255,0.85);color:#111;box-shadow:0 20px 60px rgba(0,0,0,0.1);}
+
+  .chat-header{padding:25px;font-size:2.2em;font-weight:bold;text-align:center;background:rgba(0,0,0,0.2);backdrop-filter:blur(10px);}
+  body.light .chat-header{background:rgba(255,255,255,0.5);}
+
+  #chat-box{flex:1;padding:20px;overflow-y:auto;display:flex;flex-direction:column;gap:15px;}
+  .message{max-width:80%;padding:15px 20px;border-radius:25px;opacity:0;transform:translateY(20px);animation:fadeIn 0.5s forwards;word-wrap:break-word;}
+  .user-msg{background:linear-gradient(135deg,#00ffff,#00aaff);color:#111;align-self:flex-end;border-bottom-right-radius:5px;font-size:1.1em;}
+  body.light .user-msg{background:linear-gradient(135deg,#ff6600,#ff3300);color:#fff;}
+  .bot-msg{background:rgba(255,255,255,0.1);color:#fff;align-self:flex-start;border-bottom-left-radius:5px;font-size:1.1em;}
+  body.light .bot-msg{background:rgba(0,0,0,0.05);color:#111;}
+
+  @keyframes fadeIn{to{opacity:1;transform:translateY(0);}}
+
+  .chat-input{display:flex;border-top:1px solid rgba(255,255,255,0.2);padding:15px;}
+  body.light .chat-input{border-top:1px solid rgba(0,0,0,0.1);}
+  #user-input{flex:1;padding:15px;border:none;outline:none;border-radius:15px;font-size:1.1em;background:transparent;color:inherit;}
+  #send-btn{padding:0 25px;border:none;background:#00ffff;color:#111;cursor:pointer;font-weight:bold;font-size:1.1em;border-radius:15px;transition:0.3s;}
+  body.light #send-btn{background:#ff6600;color:#fff;}
+  #send-btn:hover{transform:scale(1.05);}
+
+  .typing{font-style:italic;opacity:0.7;}
+
+  .toggle-btn{position:fixed;top:20px;right:20px;background:#00ffff;border:none;padding:12px 25px;border-radius:25px;font-weight:bold;cursor:pointer;z-index:1000;transition:0.3s;}
+  body.light .toggle-btn{background:#ff6600;color:#fff;}
+  .toggle-btn:hover{transform:scale(1.1);}
+
+  #chat-box::-webkit-scrollbar{width:8px;}
+  #chat-box::-webkit-scrollbar-thumb{background:rgba(0,255,255,0.5);border-radius:4px;}
+  body.light #chat-box::-webkit-scrollbar-thumb{background:rgba(255,102,0,0.5);}
+</style>
+</head>
+<body>
+
+<button class="toggle-btn" id="modeToggle">Switch Mode</button>
+
+<div class="main-container">
+  <div class="chat-card">
+    <div class="chat-header">💬 Talk to Steos</div>
+    <div id="chat-box">
+      <div class="message bot-msg" style="opacity:1; transform:translateY(0);">
+        👋 Welcome! Ask me anything about finding books, study tips, or library guidance.
+      </div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Type your question..." autocomplete="off">
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+</div>  
+<div>
+  <label for="" style="justify-content: center; display: flex; font-size: small; margin-bottom: 20px; padding-bottom: 20px;">Steos Can Make Mistake</label>
+</div>
+<div>
+  <label for="" style="justify-content: center; display: flex; font-size: larger; margin-bottom: 20px; padding-bottom: 20px;">Powered By Chatmode</label>
+</div>
+
+<script>
+const chatBox = document.getElementById('chat-box');
+const userInput = document.getElementById('user-input');
+const sendBtn = document.getElementById('send-btn');
+const toggleBtn = document.getElementById('modeToggle');
+
+toggleBtn.addEventListener('click', ()=>document.body.classList.toggle('light'));
+sendBtn.addEventListener('click', sendMessage);
+userInput.addEventListener('keypress', e=>{ if(e.key==='Enter') sendMessage(); });
+
+async function sendMessage(){
+  const text = userInput.value.trim();
+  if(!text) return;
+
+  appendMessage(text,'user-msg');
+  userInput.value='';
+
+  // Typing indicator
+  const typingDiv = document.createElement('div');
+  typingDiv.textContent = '🤖 AI is typing...';
+  typingDiv.className = 'message bot-msg typing';
+  chatBox.appendChild(typingDiv);
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  try{
+    // 💡 Your OpenAI API call
+    const res = await fetch('http://localhost:5000/api/chat', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ message:text })
+    });
+    const data = await res.json();
+    typingDiv.remove();
+    appendMessage(data.reply,'bot-msg');
+
+  }catch(err){
+    typingDiv.remove();
+    appendMessage('❌ Error connecting to AI','bot-msg');
+    console.error(err);
+  }
+}
+
+function appendMessage(msg,cls){
+  const div = document.createElement('div');
+  div.className='message '+cls;
+  div.textContent=(cls==='user-msg'?'🧑 You: ':'🤖 AI: ')+msg;
+  chatBox.appendChild(div);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+</script>
+
+</body>
+</html>
